@@ -1,0 +1,81 @@
+﻿@model PagedList.IPagedList<BugTracker.Models.Ticket>
+@using PagedList.Mvc;
+@using System.Web.Mvc.Html;
+
+
+<link href="~/Content/custom.css" rel="stylesheet" type="text/css" />
+
+<div class="dashboard-description">
+
+    @if (User.IsInRole("Developer"))
+    {
+        <strong><span class="dashboard-header">Developer Dashboard</span></strong>
+    }
+
+    @if (User.IsInRole("Submitter"))
+    {
+        <strong><span class="dashboard-header">Submitter Dashboard</span></strong>
+    }
+    <br />
+    <div class="filterBy">
+        @using (Html.BeginForm())
+        {
+            <p>
+                @Html.TextBox("FilterBy")
+                <input type="submit" value="Search" />
+            </p>
+        }
+    </div>
+    <hr class="dashboard-hr" />
+    <div class="sortBy subheader-link-container">
+        @Html.ActionLink("Title", "dashboard", "Users", new { sortBy = "Title", Page = ViewBag.Page, FilterBy = ViewBag.FilterBy }, null) |
+        @Html.ActionLink("Owner ", "dashboard", "Users", new { sortBy = "Owner", Page = ViewBag.Page, FilterBy = ViewBag.FilterBy }, null) |
+        @Html.ActionLink("Assignee", "dashboard", "Users", new { sortBy = "Assignment", Page = ViewBag.Page, FilterBy = ViewBag.FilterBy }, null) |
+        @Html.ActionLink("Date Created", "dashboard", "Users", new { sortBy = "CreatedDate", Page = ViewBag.Page, FilterBy = ViewBag.FilterBy }, null) |
+        @Html.ActionLink("Date Updated", "dashboard", "Users", new { sortBy = "UpdateDate", Page = ViewBag.Page, FilterBy = ViewBag.FilterBy }, null) |
+        @Html.ActionLink("Type", "dashboard", "Users", new { sortBy = "Type", Page = ViewBag.Page, FilterBy = ViewBag.FilterBy }, null) |
+        @Html.ActionLink("Priority", "dashboard", "Users", new { sortBy = "Priority", Page = ViewBag.Page, FilterBy = ViewBag.FilterBy }, null) |
+        @Html.ActionLink("Status", "dashboard", "Users", new { sortBy = "Status", Page = ViewBag.Page, FilterBy = ViewBag.FilterBy }, null) |
+        @Html.ActionLink("Project", "dashboard", "Users", new { sortBy = "project", Page = ViewBag.Page, FilterBy = ViewBag.FilterBy }, null) 
+    </div>
+
+</div>
+
+<div class="main-container">
+        @if (Model.Count() == 0)
+    {
+        <h2 style="color:white;">
+            No Assigned Tickets
+        </h2>
+    }
+    else
+    {
+    foreach (var ticket in Model)
+
+    {
+           var getUserEmail = ticket.OwnerUser.Email;
+        string[] user = getUserEmail.Split('@');
+        <div class="project-container">
+            <div class="project-description">
+                <div style="font-size: 22px; letter-spacing: 2px;">
+                    @Html.ActionLink(ticket.Title, "Details", "Tickets", new { id = ticket.Id }, null)
+                    <br />
+                    <br />
+                    <span style="font-size: 20px;">
+                        Project: @Html.ActionLink(ticket.Project.Name, "Details", "Projects", new { @id = ticket.ProjectId}, new { })  <br />
+                        Creator: @user[0]
+                    </span><br />
+                </div>
+            </div>
+        </div>
+    }
+  }
+</div>
+
+<div style="text-align:center;">
+    @Html.PagedListPager(Model, page => Url.Action("DashBoard",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
+
+
+

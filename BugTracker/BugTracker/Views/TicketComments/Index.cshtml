@@ -1,0 +1,46 @@
+﻿@model IQueryable<BugTracker.Models.TicketComment>
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Ticket Comments";
+}
+<link href="~/Content/custom.css" rel="stylesheet" type="text/css" />
+
+<div class="sub-headers" style="font-size: 20px;">
+    <span style="font-size: 30px;">Ticket Comments</span>
+    <br />
+    @foreach (var item in Model)
+    {
+        var getUserEmail = item.User.UserName;
+        string[] author = getUserEmail.Split('@');
+
+<div class="comment-div">
+    @item.Comment<br />
+    <span style="font-size: 13px;">
+        Date Created: @item.Created.ToString("MMM dd yyy HH:mm") | Author: @author[0]<br />
+    </span>
+        @if (this.User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Edit", "Edit", "TicketComments", new { @id = item.Id }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Delete", "Delete", "TicketComments", new { @id = item.Id }, new { @class = "btn btn-default" })
+
+        }
+        else if (this.User.IsInRole("Project Manager") && item.Ticket.Project.ProjectUsers.Where(x => x.UserId == this.User.Identity.GetUserId()).Any())
+        {
+            @Html.ActionLink("Edit", "Edit", "TicketComments", new { @id = item.Id }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Delete", "Delete", "TicketComments", new { @id = item.Id }, new { @class = "btn btn-default" })
+        }
+        else if ((this.User.IsInRole("Developer") || this.User.IsInRole("Submitter")) && item.UserId == this.User.Identity.GetUserId())
+        {
+            @Html.ActionLink("Edit", "Edit", "TicketComments", new { @id = item.Id }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Delete", "Delete", "TicketComments", new { @id = item.Id }, new { @class = "btn btn-default" })
+        }
+</div>
+    }
+    <div class="form-group">
+        <div class="col-md-offset-5 col-md-10">
+            @Html.ActionLink("Add Comment", "CreateComment", "TicketComments", new { @id = ViewBag.TicketId }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Back", "Details", "Tickets", new { @id = ViewBag.TicketId }, new { @class = "btn btn-default" })
+        </div>
+    </div>
+    <br />
+</div>       

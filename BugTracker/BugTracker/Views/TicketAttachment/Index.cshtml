@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BugTracker.Models.TicketAttachment>
+@{
+    ViewBag.Title = "Ticket Attachments";
+}
+
+<link href="~/Content/custom.css" rel="stylesheet" type="text/css" />
+
+<div class="sub-headers">
+    <h3>Ticket Attachments</h3>
+
+    <div class="form-horizontal">
+        <table class="table" style="font-size:16px; text-align: left;">
+            <thead>
+                <tr>
+                    <th scope="col">File Url</th>
+                    <th scope="col">Created Date</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">#</th>
+                    <th scope="col">#</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+   
+                    <tr>
+                        <th scope="row">@item.Description</th>
+                        <td>@item.FilePath</td>
+                        <td>@item.FileUrl</td>
+                        <td>@item.Created.ToString("yyyy/MM/dd")</td>
+                        <td>@item.User.UserName</td>
+                        <td>@Html.ActionLink("Download", "DownloadFile", new { id = item.Id }, new { @class = "btn btn-default" })</td>
+                        <td>@Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-default" })</td>                                         
+                    </tr>
+                 }
+            </tbody>
+        </table>
+        <div class="form-actions no-color">
+            @Html.ActionLink("Add Attachment", "Create", "TicketAttachment", new { @id = ViewBag.TicketId }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Back to Ticket Details", "Details", "Tickets", new { @id = ViewBag.TicketId }, new { @class = "btn btn-default" })
+        </div>
+    </div>
+</div>
+

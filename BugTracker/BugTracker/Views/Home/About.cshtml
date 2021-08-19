@@ -1,0 +1,60 @@
+﻿THIS IS A TEMPORARY VIEW TO SAVE SOME CODE.
+
+<div class="dashboard-description">
+    <hr class="dashboard-hr" />
+    @if (User.IsInRole("Project Manager") || User.IsInRole("Admin"))
+    {
+        <div class="subheader-link-container">
+            @Html.ActionLink("History", "Index", "TicketHistory", new { @id = Model.TicketId }, null) |
+            @Html.ActionLink("Comments", "Index", "TicketComments", new { @id = Model.TicketId }, null) |
+            @Html.ActionLink("Attachments", "Index", "TicketAttachment", new { @id = Model.TicketId }, null) |
+            @Html.ActionLink("Assign User", "AssignTicketToUser", "Tickets", new { @id = Model.TicketId }, null) |
+            @Html.ActionLink("Remove User", "RemoveUserFromATicket", "Tickets", new { @id = Model.TicketId }, null) |
+            @Html.ActionLink("DashBoard", "Dashboard", "Users", null)
+        </div>
+    }
+    else if (User.IsInRole("Submitter") || User.IsInRole("Developer"))
+    {
+        <div class="subheader-link-container">
+            @Html.ActionLink("History", "Index", "TicketHistory", new { @id = Model.TicketId }, null) |
+            @Html.ActionLink("Comments", "Index", "TicketComments", new { @id = Model.TicketId }, null) |
+            @Html.ActionLink("Attachments", "Index", "TicketAttachment", new { @id = Model.TicketId }, null) |
+            @Html.ActionLink("DashBoard", "Dashboard", "Users", null)
+
+        </div>
+    }
+
+</div>
+
+<div class="sub-headers" style="font-size: 20px;">
+    @{ var dateCreated = Model.CreatedDate.ToString("MMM dd yyy HH:mm");
+        var dateUpdated = Model.UpdatedDate.ToString("MMM dd yyy HH:mm");
+        var getAssigneeName = Model.AssignedToUserName;
+        string[] assignee = getAssigneeName.Split('@');
+        var getCreatorName = Model.OwnerUserName;
+        string[] creator = getCreatorName.Split('@');
+    }
+
+    <span style="font-size: 30px;">Ticket "@Model.TicketName" Details</span>
+    <br />
+    <div style="background-color: white; color: black; width: 300px;">
+        <div style="text-align: left; margin-left: 10px;">
+            <strong>ID:</strong>  @Model.TicketId <br />
+            <strong>Status:</strong>  @Model.TicketStatus.Name <br />
+            <strong>Created:</strong>  @dateCreated <br />
+            <strong>Updated:</strong>  @dateUpdated <br />
+            <strong>Type:</strong>  @Model.TicketType.Name<br />
+            <strong>Priority:</strong>  @Model.TicketPriority.Name<br /><br />
+            <span style="font-size:23px;">
+                <strong>Description:</strong> <br />
+                @Model.TicketDescription
+            </span>
+            <br /><br />
+            <strong>Assigned:</strong>  @assignee[0] <br />
+            <strong>Creator:</strong>  @creator[0] <br />
+            <strong>Project:  @Model.ProjectName</strong> <br />
+        </div>
+    </div>
+    <br />
+</div>
+

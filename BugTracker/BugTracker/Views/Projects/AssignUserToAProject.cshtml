@@ -1,0 +1,19 @@
+﻿<link href="~/Content/custom.css" rel="stylesheet" type="text/css" />
+
+<hr class="dashboard-hr" />
+<div class="sub-headers">
+    Assign User to Project
+    <br />
+    <br />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div style="font-size: 18px; justify-content:right;">
+            Select User: <span class="dropdown-form"> @Html.DropDownList("UserId") </span><br /><br />
+            Select Role: <span class="dropdown-form">@Html.DropDownList("ProjectId")</span> <br /><br />
+            <span class="dropdown-form"><input type="submit" value="Add User" class="btn btn-default" /></span>
+            @Html.ActionLink("Cancel", "Dashboard", "Users", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>
+

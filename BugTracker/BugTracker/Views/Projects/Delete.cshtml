@@ -1,0 +1,24 @@
+﻿@model BugTracker.Models.Project
+
+<link href="~/Content/custom.css" rel="stylesheet" type="text/css" />
+
+<br />
+<br />
+<div class="sub-headers">
+    Confirming Delete of Project: "<strong>@Model.Name</strong>"
+    <br />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />
+        </div>
+    }
+
+    @Html.ActionLink("Cancel", "Details", new { id = Model.Id }, new { @class="btn btn-default" })    
+</div>
+
+
+
+

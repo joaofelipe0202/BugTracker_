@@ -1,0 +1,23 @@
+﻿<link href="~/Content/custom.css" rel="stylesheet" type="text/css" />
+
+@if (this.User.IsInRole("Admin") || this.User.IsInRole("Project Manager"))
+{
+    if (ViewBag.IsTickets)
+    {
+        @Html.Partial("ProjectManagerDashboardTicketPartialView")
+    }
+    else
+    {
+        @Html.Partial("ProjectManagerDashBoardPartialView")
+    }
+    <div class="sub-headers">
+        Create a new Project
+        <br />
+
+        @Html.Partial("CreateNewProjectPartialView", new ViewDataDictionary<BugTracker.Models.Project>(new BugTracker.Models.Project()));
+    </div>
+}
+else if (this.User.IsInRole("Submitter") || this.User.IsInRole("Developer"))
+{
+    @Html.Partial("DeveloperSubmitterDashBoardPartialView"); 
+}

@@ -1,0 +1,181 @@
+﻿@model BugTracker.Models.Ticket
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="dashboard-description">
+    <hr class="dashboard-hr" />
+    @if (User.IsInRole("Project Manager") || User.IsInRole("Admin"))
+    {
+        <div class="subheader-link-container">
+            @Html.ActionLink("Edit", "Edit", "Tickets", new { @id = Model.Id }, null) |
+            @Html.ActionLink("History", "Index", "TicketHistory", new { @id = Model.Id }, null) |
+            @Html.ActionLink("Comments", "Index", "TicketComments", new { @id = Model.Id }, null) |
+            @Html.ActionLink("Attachments", "Index", "TicketAttachment", new { @id = Model.Id }, null) |
+            @Html.ActionLink("Assign User", "AssignTicketToUser", "Tickets", new { @id = Model.Id }, null) |
+            @Html.ActionLink("Remove User", "RemoveUserFromATicket", "Tickets", new { @id = Model.Id }, null) |
+        </div>
+    }
+    else if (User.IsInRole("Submitter") || User.IsInRole("Developer"))
+    {
+        <div class="subheader-link-container">
+            @Html.ActionLink("Edit", "Edit", "Tickets", new { @id = Model.Id }, null) |
+            @Html.ActionLink("History", "Index", "TicketHistory", new { @id = Model.Id }, null) |
+            @Html.ActionLink("Comments", "Index", "TicketComments", new { @id = Model.Id }, null) |
+            @Html.ActionLink("Attachments", "Index", "TicketAttachment", new { @id = Model.Id }, null) |
+        </div>
+    }
+</div>
+
+<br />
+
+<div class="sub-headers" style="padding-bottom: 50px;">
+    <div class="sub-header-form">
+        @using (Html.BeginForm("ChangeTicketTitle", "Tickets", FormMethod.Post))
+        {
+            @Html.HiddenFor(model => model.Id)
+            @Html.AntiForgeryToken()
+
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
+    <br />
+    <br />
+
+    <div class="sub-header-form">
+        @using (Html.BeginForm("ChangeTicketDescription", "Tickets", FormMethod.Post))
+        {
+            @Html.HiddenFor(model => model.Id)
+            @Html.AntiForgeryToken()
+
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
+    <br />
+    <br />
+
+    <div class="sub-header-form">
+        @using (Html.BeginForm("ChangeTicketType", "Tickets", FormMethod.Post))
+        {
+            @Html.HiddenFor(model => model.Id)
+            @Html.AntiForgeryToken()
+
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(model => model.TicketTypeId, "TicketTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("TicketTypeId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TicketTypeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
+    <br />
+    <br />
+
+    <div class="sub-header-form">
+        @using (Html.BeginForm("ChangeTicketPriority", "Tickets", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id);
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(model => model.TicketPriorityId, "TicketPriorityId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("TicketPriorityId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TicketPriorityId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
+    <br />
+    <br />
+
+    <div class="sub-header-form">
+        @using (Html.BeginForm("ChangeTicketStatus", "Tickets", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
+
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(model => model.TicketStatusId, "TicketStatusId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("TicketStatusId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TicketStatusId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
+    <br />
+    <br />
+
+    <div class="sub-header-form">
+        @using (Html.BeginForm("ChangeTicketDeveloper", "Tickets", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
+
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(model => model.AssignedToUserId, "AssignedToUserId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("AssignedToUserId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.AssignedToUserId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+

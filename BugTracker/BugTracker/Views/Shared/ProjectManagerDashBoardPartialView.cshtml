@@ -1,0 +1,82 @@
+﻿@model PagedList.IPagedList<BugTracker.Models.ProjectManagerViewModel>
+@using PagedList.Mvc;
+@using System.Web.Mvc.Html;
+ 
+<link href="~/Content/custom.css" rel="stylesheet" type="text/css" />
+
+<div class="dashboard-description">
+
+    @if (User.IsInRole("Admin"))
+    {
+        <strong><span class="dashboard-header">Admin Dashboard</span></strong>
+        <hr class="dashboard-hr" />
+        <div class="subheader-link-container" style="text-align:center;">
+            @Html.ActionLink("Assign User To Role", "AddUserToRole") |
+            @Html.ActionLink("Remove User From Role", "RemoveUserFromARole") |
+            @Html.ActionLink("View My Projects", "Dashboard", new { @page = ViewBag.page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, IsTickets = false }) |
+            @Html.ActionLink("View All Tickets", "Dashboard", new { @page = ViewBag.page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, IsTickets = true })
+
+        </div>
+    }
+
+    @if (User.IsInRole("Project Manager"))
+    {
+        <strong><span class="dashboard-header">Manager Dashboard</span></strong>
+        <hr class="dashboard-hr" />
+        <div class="subheader-link-container" style="text-align:center;">
+            @Html.ActionLink("View My Projects", "Dashboard", new { @page = ViewBag.page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, IsTickets = false }) |
+            @Html.ActionLink("View All Tickets", "Dashboard", new { @page = ViewBag.page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, IsTickets = true })
+        </div>
+    }
+    <div class="filterBy">
+        @using (Html.BeginForm())
+        {
+            <p>
+                @Html.TextBox("FilterBy")
+                <input type="submit" value="Search" />
+            </p>
+        }
+    </div>
+    <hr class="dashboard-hr" />
+</div>
+<div class="main-container">
+    @if (Model.Count() == 0)
+    {
+        <h2>
+            No Assigned Projects 
+        </h2>
+    }
+    else
+    {
+        foreach (var project in Model)
+        {
+
+            var getProjectManagerName = project.ProjectManagerName;
+            string[] projectManager = getProjectManagerName.Split('@');
+
+            <div class="project-container">
+                <div class="project-description">
+                    <div style="font-size: 22px; letter-spacing: 2px;">
+                        @Html.ActionLink(project.ProjectName, "Details", "Projects", new { id = project.ProjectId }, null)
+                        <br />
+                        <br />
+                        <span style="font-size: 20px;">
+                            Creator: @projectManager[0]
+                        </span>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+</div>
+
+<div style="text-align:center;">
+    @Html.PagedListPager(Model, page => Url.Action("DashBoard",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
+
+
+
+
+

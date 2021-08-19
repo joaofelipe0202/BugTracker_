@@ -1,0 +1,42 @@
+[HttpGet]
+        public ActionResult UploadTicketAttachment(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Ticket ticket = TicketService.GetTicket((int)id);
+            if (ticket == null)
+            {
+                return HttpNotFound();
+            }
+            return View(ticket);
+        }
+        [HttpPost]
+        public ActionResult UploadTicketAttachment(Ticket ticket, HttpPostedFileBase file)
+        {
+            try
+            {
+                if (ticket == null)
+                    return null;
+
+                var userId = User.Identity.GetUserId();
+
+                if (file.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(file.FileName);
+                    string filePath = Path.Combine(Server.MapPath("~/UploadedFiles"), fileName);
+                    string fileUrl = filePath + "/ " + fileName;
+
+                    TicketAttachmentService.CreateTicketAttachment(userId, ticket.Id, filePath, fileUrl);
+
+                    ViewBag.Message = "Attachment uploaded successfully";
+                }
+            }
+            catch
+            {
+                ViewBag.Message = "Attachment failed to upload";
+            }
+            return View();
+        }
+    }

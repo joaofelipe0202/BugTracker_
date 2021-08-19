@@ -1,0 +1,39 @@
+﻿@model List<BugTracker.Models.Ticket>
+
+<div class="main-container">
+    @foreach (var ticket in Model)
+    {
+        var dateCreated = ticket.Created.ToString("MMM dd yyy HH:mm");
+        var dateUpdated = ticket.Updated.ToString("MMM dd yyy HH:mm");
+
+        <div class="ticket-container">
+            <div class="ticket-description">
+                <div>
+                    <strong style="font-size: 22px; letter-spacing: 2px;">@Html.ActionLink(ticket.Title, "Details", "Tickets", new { id = ticket.Id }, null)</strong>
+                    <br />
+                    <span>@ticket.Id | @ticket.TicketStatus.Name</span> <br />
+                    <span>@dateCreated | @dateUpdated </span><br /><br />
+                    @ticket.Description <br />                    
+
+                    <br />
+                    <br />
+                    @if (ticket.AssignedToUser == null)
+                    {
+                        <span style="color:white;">Assigned: Not Assigned</span>
+                    }
+                    else
+                    {
+                        <span>Assigned: @ticket.AssignedToUser.UserName</span>
+                    }
+                    <br />
+                    Creator: @ticket.OwnerUser.UserName <br />
+                    @ticket.Project.Name <br />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+

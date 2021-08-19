@@ -1,0 +1,23 @@
+﻿<link href="~/Content/custom.css" rel="stylesheet" type="text/css" />
+
+<div class="dashboard-description">
+    <strong><span class="dashboard-header">Remove User</span></strong>
+</div>
+
+<hr class="dashboard-hr" />
+<div class="sub-headers">
+    Remove User from Project
+    <br />
+    <br />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div style="font-size: 18px; justify-content:right;">
+            Select User: <span class="dropdown-form"> @Html.DropDownList("UserId") </span><br /><br />
+            @*Select Role: <span class="dropdown-form">@Html.DropDownList("ProjectId")</span> <br /><br />*@
+            <span class="dropdown-form"><input type="submit" value="Remove User" class="btn btn-default" /></span>
+            @Html.ActionLink("Cancel", "Dashboard", "Users", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>
+

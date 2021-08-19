@@ -1,0 +1,28 @@
+﻿@model BugTracker.Models.Project
+
+<link href="~/Content/custom.css" rel="stylesheet" type="text/css" />
+
+
+<div class="dashboard-description">
+    <strong><span class="dashboard-header">@Model.Name Details</span></strong>
+    <hr class="dashboard-hr" />
+    @if (User.IsInRole("Project Manager") || User.IsInRole("Admin"))
+    {
+        <div class="subheader-link-container" style="text-align:center;">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
+            @Html.ActionLink("Add User To Project", "AssignUserToAProject", new { id = Model.Id }) |
+            @Html.ActionLink("Remove User From Project", "RemoveUserFromProject", new { id = Model.Id })
+        </div>
+    }
+</div>
+ 
+<br />
+<br />
+
+<div>
+    @Html.Partial("AllTicketsOfProjectPartialView", null, new ViewDataDictionary<List<BugTracker.Models.Ticket>>(Model.Tickets.ToList()))
+</div>
+
+
+

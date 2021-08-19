@@ -1,0 +1,39 @@
+﻿@model List<BugTracker.Models.TicketHistory>
+
+<link href="~/Content/custom.css" rel="stylesheet" type="text/css" />
+
+
+<div class="sub-headers">
+    <h3>Ticket History</h3>
+
+    <div class="form-horizontal">
+        <table class="table" style="font-size:18px; text-align: left;"> 
+            <thead>
+                <tr>
+                    <th scope="col">Property</th>
+                    <th scope="col">New Value</th>
+                    <th scope="col">Old Value</th>
+                    <th scope="col">User Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@item.Property</th>
+                        <td>@item.NewValue</td>
+                        <td>@item.OldValue</td>
+                        <td>@item.User.Email</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="form-actions no-color">
+                @Html.ActionLink("Back to Ticket Details", "Details", "Tickets", new { @id = ViewBag.TicketId }, new { @class = "btn btn-default" })
+        </div>
+    </div>
+</div>
+
+
+            
+

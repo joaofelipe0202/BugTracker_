@@ -1,0 +1,32 @@
+﻿@model IEnumerable<BugTracker.Models.ProjectManagerViewModel>
+@{
+    ViewBag.Title = "GetAssignedProjects";
+}
+
+<h2>Assigned Projects</h2>
+
+
+<div class="main-container">
+
+    @foreach (var project in Model)
+    {
+        <div class="project-container">
+            <div class="project-description">
+                <div style="font-size: 22px; letter-spacing: 2px;">
+                    @Html.ActionLink(project.ProjectName, "Details", "Projects", new { id = project.ProjectId }, null)
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <span style="font-size: 20px;">
+                        <strong>Project Manager:</strong>  @project.ProjectManagerName <br />
+                    </span><br />
+                    @Html.ActionLink("Create Ticket", "Create", "Tickets", new { @id = project.ProjectId}, new { })
+                </div>
+            </div>
+        </div>
+    }
+
+
+</div>
+

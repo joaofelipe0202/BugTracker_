@@ -1,0 +1,269 @@
+/*HOME PAGE*/
+.home-header {
+    margin: auto;
+    padding: 20px 20px 20px;
+    width: 100%;
+    color: #c74a3b;
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.home-description {
+    margin: auto;
+    padding: 20px 20px 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Century Gothic';
+    color: white;
+    display: inline;
+}
+
+svg {
+    display: inline-block;
+    height: 130px;
+    fill: white;
+}
+
+.description{
+    margin-left: 30px;
+    display: inline-block;
+    width: 75%;
+    font-size: 22px;
+    justify-content: right;
+}
+
+hr {
+    position: relative;
+    top: 20px;
+    border: none;
+    width: 100%;
+    height: 12px;
+    background-image: linear-gradient(to right, #917265, #AD8175, #C74A3B, #C74A3B, #A33428, #A33428, #699776, #699776, #699776);
+    margin-bottom: 50px;
+}
+
+.site-background {
+    background: #060911;
+}
+
+/*NAVBAR*/
+ul.nav a:hover {
+    color: #fff !important;
+    background-color: #a33428 !important;
+}
+
+.custom-nav {   
+    background: #060911;
+    font-size: 18px;
+}
+
+/*DASHBOARD*/
+.dashboard-description {
+    margin: auto;
+    padding: 20px 20px 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Century Gothic';
+    color: #c74a3b;
+}
+
+.dashboard-header {
+    font-size: 4rem;
+}
+
+.dashboard-hr {
+    position: relative;
+    top: 6px;
+    border: none;
+    height: 3px;
+    background-image: linear-gradient(to right, #917265, #AD8175, #C74A3B, #C74A3B, #A33428, #A33428, #699776, #699776, #699776);
+    margin-bottom: 5px;
+}
+
+
+/*PROJECT MANAGER DASHBOARD PARTIAL VIEW*/
+.main-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;  
+    margin-left: 20px;
+}
+
+.project-container {
+    width: 360px;
+    margin-right: 10px;
+    margin-top: 10px;
+    
+}
+
+.project-description {
+    margin-bottom: 10px;
+    padding: 5px 20px;
+    width: 100%;
+    height: 150px;
+    text-align: left;
+    font-size: 15px;
+    font-family: 'Century Gothic';
+    color: white;
+    background-color: #548e65;
+    opacity: 0.9;
+    transition: 0.2s;
+}
+
+.project-description:hover, .ticket-description:hover {
+    opacity: 1;
+}
+
+.details-link {
+    font-size: 10px;
+    text-align: right;
+}
+
+.complete-project-check {
+    margin-left: 25px;
+    background-color: transparent;
+    border: none;
+}
+
+.sub-headers {
+    text-align: center;
+    font-size: 15px;
+    padding: 10px;
+    background-image: linear-gradient(#C74A3B, #A33428, #882a1f);
+    color: white;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.sub-header-form {
+    text-align: center;
+    font-size: 15px;
+    padding: 10px;
+    color: white;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+/*TICKETS*/
+
+.subheader-link-container {
+    text-align: center;
+    width: 100%;
+    background-image: linear-gradient(#db8c84, #C74A3B, #A33428, #882a1f, #882a1f);
+    font-size: 18px;
+    padding: 5px;
+    color: white;
+}
+
+.all-tickets-description {
+    margin: auto;
+    background-color: #3a6899;
+    padding: 20px 20px 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Century Gothic';
+    color: white;
+}
+
+.all-tickets-header {
+    font-size: 3.5rem;
+}
+
+.ticket-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 320px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.ticket-description {
+    margin-bottom: 10px;
+    padding: 5px 15px;
+    width: 100%;
+    text-align: left;
+    font-size: 15px;
+    font-family: 'Century Gothic';
+    color: white;
+    background-color: #548e65;
+    opacity: 0.9;
+    transition: 0.2s;
+}
+
+.ticket-detail {
+    background-color: white;
+    border: 2px solid black;
+}
+
+.details-info {
+    color: white;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 20px 20px;
+    background-color: #548e65;
+    font-family: 'Century Gothic';
+    font-size: 20px;
+}
+/*FORMS*/
+.form-styling {
+    font-family: 'Century Gothic';
+    margin: auto;
+    font-size: 23px;
+    width: 80%;
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+}
+
+.btn-default:visited {
+    color: black;
+}
+
+.btn-default:hover {
+    color: black;
+}
+
+.dropdown-form {
+    color: black;
+}
+
+/*LOGIN*/
+.account-page-styles {
+    color: white;
+    padding: 5px 20px;
+    background-image: linear-gradient(#C74A3B, #A33428, #882a1f);
+}
+
+/*LINK STYING*/
+a, a:hover, a:visited {
+    text-decoration: none;
+}
+
+.main-container a,
+.main-container a:hover,
+.main-container a:visited,
+.subheader-link-container a,
+.subheader-link-container a:hover,
+.subheader-link-container a:visited,
+.custom-nav a,
+.custom-nav a:hover,
+.custom-nav a:visited,
+.account-page-styles a,
+.account-page-styles a:hover,
+.account-page-styles a:visited {
+    color: white;
+}
+
+/*COMMENT STYLING*/
+.comment-div {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    text-align: left;
+    padding: 10px 10px;
+    margin-bottom: 5px;
+}
+

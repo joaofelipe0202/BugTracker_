@@ -1,0 +1,43 @@
+﻿@model PagedList.IPagedList<BugTracker.Models.Project>
+@using PagedList.Mvc;
+@using System.Web.Mvc.Html;
+
+<link href="~/Content/custom.css" rel="stylesheet" type="text/css" />
+
+<div class="dashboard-description">
+    <strong><span class="dashboard-header">All Projects</span></strong>
+    <hr class="dashboard-hr" />
+</div>
+<div class="main-container">
+
+    @foreach (var project in Model)
+    {
+        <div class="project-container">
+            <div class="project-description">
+                <div style="font-size: 22px; letter-spacing: 2px;">
+                    @Html.ActionLink(project.Name, "Details", "Projects", new { id = project.Id }, null)
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <span style="font-size: 20px;">
+                        Tickets:  <br />
+                        Creator: TBD
+                    </span><br />
+                </div>
+            </div>
+        </div>
+    }
+
+
+</div>
+
+<div style="text-align:center;">
+    @Html.PagedListPager(Model, page => Url.Action("AllProjects",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
+
+<br />
+
+<div class="sub-headers">New Project</div>
+@Html.Partial("CreateNewProjectPartialView", null, new ViewDataDictionary<BugTracker.Models.Project>(new BugTracker.Models.Project()));

@@ -1,0 +1,104 @@
+﻿@model BugTracker.Models.TicketsViewModel
+
+<link href="~/Content/custom.css" rel="stylesheet" type="text/css" />
+<div class="dashboard-description">
+    <hr class="dashboard-hr" />
+    @if (User.IsInRole("Project Manager") || User.IsInRole("Admin"))
+    {
+        <div class="subheader-link-container">
+            @Html.ActionLink("Edit", "Edit", "Tickets", new { @id = Model.TicketId }, null) |
+            @Html.ActionLink("History", "Index", "TicketHistory", new { @id = Model.TicketId }, null) |
+            @Html.ActionLink("Comments", "Index", "TicketComments", new { @id = Model.TicketId }, null) |
+            @Html.ActionLink("Attachments", "Index", "TicketAttachment", new { @id = Model.TicketId }, null) |
+            @Html.ActionLink("Assign User", "AssignTicketToUser", "Tickets", new { @id = Model.TicketId }, null) |
+            @Html.ActionLink("Remove User", "RemoveUserFromATicket", "Tickets", new { @id = Model.TicketId }, null) |
+        </div>
+    }
+    else if (User.IsInRole("Submitter") || User.IsInRole("Developer"))
+    {
+        <div class="subheader-link-container">
+            @Html.ActionLink("Edit", "Edit", "Tickets", new { @id = Model.TicketId }, null) |
+            @Html.ActionLink("History", "Index", "TicketHistory", new { @id = Model.TicketId }, null) |
+            @Html.ActionLink("Comments", "Index", "TicketComments", new { @id = Model.TicketId }, null) |
+            @Html.ActionLink("Attachments", "Index", "TicketAttachment", new { @id = Model.TicketId }, null) |
+        </div>
+    }
+</div>
+<div class="sub-headers">
+    <h3>Ticket "@Model.TicketName" Details</h3>
+    <div class="form-horizontal">
+        <br />
+        <dl class="dl-horizontal">
+            <dt>
+                Created Date
+            </dt>
+            <dd>
+                @Html.TextBoxFor(model => model.CreatedDate, new { @class = "form-control", @disabled = "disabled" })
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>
+                Updated Date
+            </dt>
+            <dd>
+                @Html.TextBoxFor(model => model.UpdatedDate, new { @class = "form-control", @disabled = "disabled" })
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>
+                Type
+            </dt>
+            <dd>
+                @Html.TextBoxFor(model => model.TicketType.Name, new { @class = "form-control", @disabled = "disabled" })
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>
+                Priority
+            </dt>
+            <dd>
+                @Html.TextBoxFor(model => model.TicketPriority.Name, new { @class = "form-control", @disabled = "disabled" })
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>
+                Status
+            </dt>
+            <dd>
+                @Html.TextBoxFor(model => model.TicketStatus.Name, new { @class = "form-control", @disabled = "disabled" })
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>
+                Description
+            </dt>
+            <dd>
+                @Html.TextBoxFor(model => model.TicketDescription, new { @class = "form-control", @disabled = "disabled" })
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>
+                Assigned Developer
+            </dt>
+            <dd>
+                @Html.TextBoxFor(model => model.AssignedToUserName, new { @class = "form-control", @disabled = "disabled" })
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>
+                Owner
+            </dt>
+            <dd>
+                @Html.TextBoxFor(model => model.OwnerUserName, new { @class = "form-control", @disabled = "disabled" })
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>
+                Project Name
+            </dt>
+            <dd>
+                @Html.TextBoxFor(model => model.ProjectName, new { @class = "form-control", @disabled = "disabled" })
+            </dd>
+        </dl>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+﻿@model BugTracker.Models.TicketComment
+
+<link href="~/Content/custom.css" rel="stylesheet" type="text/css" />
+
+<br />
+<br />
+<div class="sub-headers">
+    Confirming Delete of Comment: "<strong>@Model.Comment</strong>"
+    <br />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />
+            @Html.ActionLink("Cancel", "Index", "TicketComments", new { id = Model.TicketId }, new { @class = "btn btn-default" })
+
+        </div>
+    }
+
+</div>
+
+

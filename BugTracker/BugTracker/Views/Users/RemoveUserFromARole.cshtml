@@ -1,0 +1,17 @@
+﻿<link href="~/Content/custom.css" rel="stylesheet" type="text/css" />
+
+<div class="sub-headers">
+    Remove User from Role
+    <br />
+    <br />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div style="font-size: 18px;">
+            Select User:<span class="dropdown-form"> @Html.DropDownList("UserId") </span><br /><br />
+            Select Role: <span class="dropdown-form">@Html.DropDownList("Role")</span> <br /><br />
+            <span class="dropdown-form"><input type="submit" value="Add User" class="btn btn-default" /></span>
+            @Html.ActionLink("Cancel", "Dashboard", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

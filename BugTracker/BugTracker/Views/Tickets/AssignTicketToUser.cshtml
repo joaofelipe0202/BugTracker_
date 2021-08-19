@@ -1,0 +1,18 @@
+﻿<link href="~/Content/custom.css" rel="stylesheet" type="text/css" />
+
+<div class="sub-headers">    
+    Assign Ticket to User
+    <br />
+    <br />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div style="font-size: 18px;">
+            Select User: <span class="dropdown-form">@Html.DropDownList("UserId")</span> <br /><br />
+            <input type="submit" value="Assign User" class="btn btn-default" />
+            @Html.ActionLink("Back", "Details", "Tickets", new { @id = ViewBag.TicketId }, new { @class = "btn btn-default" })
+        </div>
+    }
+    <br />
+</div>
